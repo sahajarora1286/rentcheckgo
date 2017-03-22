@@ -4,6 +4,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import oracle.jdbc.proxy.annotation.GetProxy;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +21,11 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.rentcheckgo.dao.TaskDAO;
+import com.rentcheckgo.dao.TaskDAOImpl;
 import com.rentcheckgo.dao.UserDAO;
 import com.rentcheckgo.dao.UserDAOImpl;
+import com.rentcheckgo.model.Task;
 import com.rentcheckgo.model.User;
 
 @Configuration
@@ -46,6 +51,7 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter{
 	    dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
 	    dataSource.setUsername("rcgadmin");
 	    dataSource.setPassword("root");
+	  
 	 
 	    return dataSource;
 	}
@@ -55,8 +61,9 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter{
 	public SessionFactory getSessionFactory(DataSource dataSource) {
 	 
 	    LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
-	 
-	    sessionBuilder.addAnnotatedClasses(User.class);
+	    
+	    sessionBuilder.addAnnotatedClasses(User.class, Task.class);
+	    sessionBuilder.addProperties(getProperties());
 	 
 	    return sessionBuilder.buildSessionFactory();
 	}
@@ -77,6 +84,12 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter{
 	    return new UserDAOImpl(sessionFactory);
 	}
 	
+	@Autowired
+	@Bean(name = "taskDao")
+	public TaskDAO getTaskDao(SessionFactory sessionFactory) {
+	    return new TaskDAOImpl(sessionFactory);
+	}
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
@@ -88,10 +101,14 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter{
     }
 
 	
-	private Properties getHibernateProperties() {
+	@Bean
+    public Properties getProperties() {
+		
 	    Properties properties = new Properties();
 	    properties.put("hibernate.show_sql", "true");
 	    properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
+	    properties.put("hibernate.hbm2ddl.auto", "update");
+	   
 	    return properties;
 	}
  

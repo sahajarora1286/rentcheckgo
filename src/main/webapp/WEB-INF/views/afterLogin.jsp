@@ -13,13 +13,15 @@
     <c:url value="/resources/css/bootstrap.min.css" var="bootstrapMin" />
     <link href="${bootstrapMin}" rel="stylesheet">
     
+    <c:url value="/resources/css/img-rotate.css" var="imgRotateCSS" />
+    <link href="${imgRotateCSS}" rel="stylesheet">
    
 </head>
 <body>
 
 <!-- NavBar -->
 
-<div class="navbar-wrapper">
+<div class="navbar-wrapper" style="margin-bottom:0">
       <div class="container">
 
         <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -38,118 +40,44 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/app/">Dashboard</a></li>
-        <li><a href="#">My Account</a></li>
-		<li><a href="#">Contact</a></li>
+        <li class="active"><a href="/app/dashboard">Dashboard</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Bids<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="#">Active Bids</a></li>
           </ul>
         </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tasks<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/app/browseTasks">Browse Tasks</a></li>
+            <li><a href="/app/navPostTask">Post a Task</a></li>
+            <li class="divider"></li>
+            <li><b><p style="text-align:left; padding-left:20px; font-size:12px">MY TASKS</p></b></li>
+            <li><a href="#">Active Tasks</a></li>
+            <li><a href="#">Completed Tasks</a></li>
+          </ul>
+        </li>
+        
+     
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+       <li><a href="#">Account Balance: $0.00</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-			<ul id="login-dp" class="dropdown-menu" style="width: 250px; padding-left: 15px; padding-right:15px">
-				<li>
-					 <div class="row">
-							<div class="col-md-12">
-								<div class = "login-area" style="text-align:center; margin-top: 20px">
-								<b>Login using</b>
-								<div class="social-buttons">
-									<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-									<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-								</div>
-                                    <p style="text-align:center"> OR </p>
-								 <form:form class="form" role="form" method="get" action="login" accept-charset="UTF-8" id="login-nav">
-										<div class="form-group">
-											 <label class="sr-only" for="loginEmail">Email address</label>
-											 <input name="loginEmail" type="email" class="form-control" id="loginEmail" placeholder="Email address" required>
-										</div>
-										<div class="form-group">
-											 <label class="sr-only" for="loginPassword">Password</label>
-											 <input name="loginPassword" type="password" class="form-control" id="loginPassword" placeholder="Password" required>
-                                             <div class="help-block text-right" style="text-align: center" ><a href="">Forgot password ?</a></div>
-										</div>
-										<div class="form-group">
-											 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-										</div>
-										<div class="checkbox">
-											 <label>
-											 <input type="checkbox"> Keep me logged-in
-											 </label>
-										</div>
-								 </form:form>
-							</div>
-							
-							
-							</div>
-					 </div>
-				</li>
-			</ul>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">My Profile</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Billing Info</a></li>
+            <li><a href="#">Transaction History</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Account Settings</a></li>
+            <li class="divider"></li>
+            <li style="padding-left: 13px; padding-right: 13px;padding-top:16px;padding-bottom:16px "><form method="get" action="logout" accept-charset="UTF-8"><button  type="submit" class="btn btn-primary btn-block" value="logout"> Sign Out</button></form></li>
+          </ul>
         </li>
-          
-          <!--Sign Up Nav Item-->
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Sign Up</b> <span class="caret"></span></a>
-			<ul id="register-dp" class="dropdown-menu" style="width: 250px; padding-left: 15px; padding-right:15px">
-				<li>
-					 <div class="row">
-							<div class="col-md-12">
-								<div class = "register-area"  style="margin-top: 20px;">
-                                    <b><p style="color: #008ae6">Your new home is a just click away. Get started instantly.</p></b>
-								 <form method="post" action="save" accept-charset="UTF-8" id="register-nav">
-								 	
-								 	
-								 	
-								 	<div class="form-group">
-											 <label class="sr-only" for="firstName">First name</label>
-											 <input name="firstName" type="text" class="form-control" id="firstName" placeholder="First name" required>
-										</div>
-								 	
-								 	
-								 	<div class="form-group">
-											 <label class="sr-only" for="lastName">First name</label>
-											 <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Last name" required>
-										</div>
-								 
-								 	
-										<div class="form-group">
-											 <label class="sr-only" for="registerEmail">Email address</label>
-											 <input name="registerEmail" type="email" class="form-control" id="registerEmail" placeholder="Email address" required>
-										</div>
-										<div class="form-group">
-											 <label class="sr-only" for="registerPassword">Password</label>
-											 <input name="registerPassword" type="password" class="form-control" id="registerPassword" placeholder="Password" required>
-                                            
-										</div>
-                                     
-                                        <div class="form-group">
-											 <label class="sr-only" for="confirmRegisterPassword">Confirm Password</label>
-                                            <input name="confirmRegisterPassword" type="password" class="form-control" id="confirmRegisterPassword" placeholder="Confirm Password" required>
-										</div>
-										<div class="form-group">
-											 <button type="submit" class="btn btn-primary btn-block" value="save">Sign Up</button>
-										</div>
-										
-								 </form>
-							</div>
-							
-							
-							</div>
-					 </div>
-				</li>
-			</ul>
-        </li>
+        
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -160,20 +88,59 @@
     
     
 	
-	<div class="container">
+	<div class="container" >
 		<div class="row">
-			<div class ="col-md-12">
-				<h2 style="text-align: center">Hello, ${sessionScope.firstName}</h2>
+			<div class ="col-sm-12">
+				<h2 style="text-align: left">Hello! ${sessionScope.firstName}, </h2>
+				<h3 style="margin-left: 90px">What would you like to do today?</h3>
 			</div>
 		</div>
+		
+		<!-- Three columns of text below the carousel -->
+      <div class="row"  style="margin-top: 120px">
+        <div class="col-lg-6" style="text-align:center;">
+        <c:url value="/resources/img/home.png" var="homeImg" />
+    	
+          <a href="/app/navPostTask"><img class="img-circle" src="${homeImg}" alt="Generic placeholder image" width="140" height="140"></a>
+          <h2>Rent</h2>
+          <h3>Renting a place? Get it checked out.</h3>
+          <h3>Post a Task now.</h3>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-6" style="text-align:center">
+        
+        <c:url value="/resources/img/dollar.png" var="dollarImg" />
+        
+          <a href="/app/browseTasks"><img class="img-circle" src="${dollarImg}" alt="Generic placeholder image" width="140" height="140"></a>
+          <h2>Check</h2>
+          <h3>Check a place and make quick bucks.</h3>
+          <h3>Browse Tasks.</h3>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        
+      </div><!-- /.row -->
+		
+		
 	</div>
 	
 
 	<br>
-	<div class="form-group">
-	<form method="get" action="logout" accept-charset="UTF-8">
-		<button type="submit" class="btn btn-primary btn-block" value="logout"> Sign Out</button>
-		</form>
-	</div>
+	
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<c:url value="resources/js/vendor/jquery.min.js" var="jqueryMinJS"/>" <script src="${jqueryMinJS}"><\/script>')</script>
+   
+   <c:url value="resources/js/bootstrap.min.js" var="bootstrapMinJSS" />
+    <script src="${bootstrapMinJSS}"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <c:url value="resources/js/vendor/holder.min.js" var="holderMinJS" />
+    <script src="${holderMinJS}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <c:url value="resources/js/ie10-viewport-bug-workaround.js" var="ie10WorkAroundJS"/>
+    <script src="${ie10WorkAroundJS}"></script>
+	
 </body>
 </html>

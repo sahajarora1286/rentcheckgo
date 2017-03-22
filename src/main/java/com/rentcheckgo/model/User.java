@@ -30,6 +30,8 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -38,7 +40,7 @@ public class User {
 	}
 	
 	@Id
-	@Column(name="ID")
+	@Column(name="USER_ID")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_seq")
 	@SequenceGenerator(
 		name="user_seq",
